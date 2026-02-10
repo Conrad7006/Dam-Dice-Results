@@ -13,6 +13,7 @@ An example on how to get the sheet id
 
 # Import the modules used
 import pandas as pd
+import streamlit as st
 
 
 
@@ -25,10 +26,6 @@ url_last = "/export?format=csv&gid="
 url = url_first + Sheet_id + url_last + GID_number
 df = pd.read_csv(url)
 
-# Check if transformation has worked
-print(df.info())
-print(df.describe())
-
 
 
 # Adding example names
@@ -38,6 +35,7 @@ times = ["00:30:00", "00:48:00", "00:51:00", "00:53:00", "00:42:00", "01:02:00"]
 distance = ["5 km", "10 km", "10 km", "10 km", "5 km", "10 km"]
 df_new = pd.DataFrame([
     {
+        "Did you do doubles?": "No",
         "Timestamp": "02/22/2026 10:10:10",
         "Name": f"{names[i]}",
         "Surname": f"{surnames[i]}",
@@ -69,14 +67,30 @@ df["race_date"] = df["dd"].astype(str).str.zfill(2) + "/" + df["mm"].astype(str)
 ## Next, we want to convert the entered time to a datetime
 df["Please submit your time"] = pd.to_timedelta(df["Please submit your time"])
 
+## Then, we replace the doubles answer with a 1 or 0
+def doubles_check(Answer):
+    if Answer == "Yes":
+        return 1
+    elif Answer == "No":
+        return 0
+
+df["Did you do doubles?"] = df["Did you do doubles?"].apply(doubles_check)
+
 ## Now, we sort and create separate dices for 5km and 10km
-df = df.sort_values(by = ["dd", "Please submit your time"])
+df = df.sort_values(by = ["race_date", "Please submit your time"])
 
-df_5km = df[df["Did you do short or long dice?"] == "5 km"]
-df_10km = df[df["Did you do short or long dice?"] == "10 km"]
+df_5km = df[df["Did you do short or long dice?"] == "5 km"].copy()
+df_10km = df[df["Did you do short or long dice?"] == "10 km"].copy()
 
-## The final step is pivoting our dataframe so that each race is a column and each person a row
-df_5km_final = (df_5km.pivot_table(
+## Now compute a rank for each paddler based on the day and double the rank for doubles
+df_5km["Rank"] = df_5km.groupby("race_date")["Please submit your time"].rank(method="dense")    # "dense" causes doubles boats to be considered together
+df_10km["Rank"] = df_10km.groupby("race_date")["Please submit your time"].rank(method="dense")  
+
+df_5km["Bobaas"] = df_5km["Rank"] + df_5km["Rank"] * df_5km["Did you do doubles?"]
+df_10km["Bobaas"] = df_10km["Rank"] + df_10km["Rank"] * df_10km["Did you do doubles?"]
+
+## Pivot the dataframe so that each race is a column and each person a row
+df_5km_yster = (df_5km.pivot_table(
     index = ["Name", "Surname"], 
     columns = "race_date",
     values = "Please submit your time",
@@ -84,17 +98,42 @@ df_5km_final = (df_5km.pivot_table(
     ).sort_index(axis=1)
 )
 
-df_10km_final = (df_10km.pivot_table(
+df_10km_yster = (df_10km.pivot_table(
     index = ["Name", "Surname"], 
     columns = "race_date",
     values = "Please submit your time",
     aggfunc = "first"
     ).sort_index(axis=1)
 )
+
+## Create a number of races column for the yster competition
+df_5km_yster["# Races"] = df_5km_yster.notna().sum(axis=1)
+df_10km_yster["# Races"] = df_10km_yster.notna().sum(axis=1)
+
+## Pivot the dataframe so that each race rank is a column and each person is a row
+df_5km_bobaas = (df_5km.pivot_table(
+    index = ["Name", "Surname"], 
+    columns = "race_date",
+    values = "Bobaas",
+    aggfunc = "first"
+    ).sort_index(axis=1)
+)
+
+df_10km_bobaas = (df_10km.pivot_table(
+    index = ["Name", "Surname"], 
+    columns = "race_date",
+    values = "Bobaas",
+    aggfunc = "first"
+    ).sort_index(axis=1)
+)
+
+
 
 
 
 # Now, create the streamlit app
+st.set_page_config(page_title="Maties Canoeing Dam Dice Results", layout="wide")
+
 
 
 
