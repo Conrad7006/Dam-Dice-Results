@@ -107,6 +107,15 @@ df_10km_yster = (df_10km.pivot_table(
 df_5km_yster["# Races"] = df_5km_yster.notna().sum(axis=1)
 df_10km_yster["# Races"] = df_10km_yster.notna().sum(axis=1)
 
+## Now that calculations are done, create a display copy for streamlit (timedelta is not nice)
+df_5km_yster_display = df_5km_yster.applymap(
+    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else ""
+)
+
+df_10km_yster_display = df_10km_yster.applymap(
+    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else ""
+)
+
 ## Pivot the dataframe so that each race is a column and each person is a row with bobaas points as the indeces
 df_5km_bobaas = (df_5km.pivot_table(
     index = ["Name", "Surname"], 
@@ -162,7 +171,10 @@ if menu == "Main":
     st.title("Maties Canoeing Dam Dice Results")
 
     # Show the two rank dataframes
+    st.write("The results of our 10 km dam dices")
     st.dataframe(df_10km_rank)
+    
+    st.write("/nThe results of our 5 km dam dices")
     st.dataframe(df_5km_rank)
 
 ### Next, the page that contains information on the Yster competition
@@ -170,15 +182,21 @@ elif menu == "Yster":
     st.title("The Yster Competition")
     
     # Show the two yster dataframes
-    st.dataframe(df_10km_yster)
-    st.dataframe(df_5km_yster)
+    st.write("The results of our 10 km dam dices")
+    st.dataframe(df_10km_yster_display)
+    
+    st.write("/nThe results of our 5 km dam dices")
+    st.dataframe(df_5km_yster_display)
     
 ### Finally, the page that contains information on the Bobaas competition
 elif menu == "Bobaas":
     st.title("The Bobaas Competition")
     
     # Show the two bobaas dataframes
+    st.write("The results of our 10 km dam dices")
     st.dataframe(df_10km_bobaas)
+    
+    st.write("/nThe results of our 5 km dam dices")
     st.dataframe(df_5km_bobaas)
     
     
