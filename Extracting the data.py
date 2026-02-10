@@ -174,7 +174,7 @@ if menu == "Main":
     st.write("The results of our 10 km dam dices")
     st.dataframe(df_10km_rank)
     
-    st.write("/nThe results of our 5 km dam dices")
+    st.write("\nThe results of our 5 km dam dices")
     st.dataframe(df_5km_rank)
 
 ### Next, the page that contains information on the Yster competition
@@ -185,7 +185,7 @@ elif menu == "Yster":
     st.write("The results of our 10 km dam dices")
     st.dataframe(df_10km_yster_display)
     
-    st.write("/nThe results of our 5 km dam dices")
+    st.write("\nThe results of our 5 km dam dices")
     st.dataframe(df_5km_yster_display)
     
 ### Finally, the page that contains information on the Bobaas competition
@@ -196,7 +196,7 @@ elif menu == "Bobaas":
     st.write("The results of our 10 km dam dices")
     st.dataframe(df_10km_bobaas)
     
-    st.write("/nThe results of our 5 km dam dices")
+    st.write("\nThe results of our 5 km dam dices")
     st.dataframe(df_5km_bobaas)
     
     
