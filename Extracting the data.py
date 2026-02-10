@@ -110,7 +110,7 @@ df_10km_yster = (df_10km.pivot_table(
 df_5km_yster["# Races"] = df_5km_yster.notna().sum(axis=1)
 df_10km_yster["# Races"] = df_10km_yster.notna().sum(axis=1)
 
-## Pivot the dataframe so that each race rank is a column and each person is a row
+## Pivot the dataframe so that each race is a column and each person is a row with bobaas points as the indeces
 df_5km_bobaas = (df_5km.pivot_table(
     index = ["Name", "Surname"], 
     columns = "race_date",
@@ -127,6 +127,23 @@ df_10km_bobaas = (df_10km.pivot_table(
     ).sort_index(axis=1)
 )
 
+df_5km_rank = (df_5km.pivot_table(
+    index = ["Name", "Surname"], 
+    columns = "race_date",
+    values = "Rank",
+    aggfunc = "first"
+    ).sort_index(axis=1)
+)
+
+df_10km_rank = (df_10km.pivot_table(
+    index = ["Name", "Surname"], 
+    columns = "race_date",
+    values = "Rank",
+    aggfunc = "first"
+    ).sort_index(axis=1)
+)
+
+# Now create the Bobaas ranking column
 
 
 
@@ -134,7 +151,8 @@ df_10km_bobaas = (df_10km.pivot_table(
 # Now, create the streamlit app
 st.set_page_config(page_title="Maties Canoeing Dam Dice Results", layout="wide")
 
-
+st.dataframe(df_10km_rank)
+st.dataframe(df_5km_rank)
 
 
 
