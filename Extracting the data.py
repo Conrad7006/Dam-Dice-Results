@@ -50,9 +50,6 @@ df = pd.concat([df, df_new], ignore_index=True)
 
 
 
-
-
-
 # Now, lets clean and transform the data
 ## The timestamp has the date and the time. Time is unimportant and we want to separate the date.
 df["Timestamp"] = pd.to_datetime(df["Timestamp"], format="%m/%d/%Y %H:%M:%S")
@@ -143,18 +140,52 @@ df_10km_rank = (df_10km.pivot_table(
     ).sort_index(axis=1)
 )
 
-# Now create the Bobaas ranking column
-
+## Now create the Bobaas ranking column
+df_10km_bobaas["Total"] = 225 - (15 - df_10km_bobaas).clip(lower=0).sum(axis=1)  # Clip(lower=0) replaces negative values with 0
+df_5km_bobaas["Total"] = 225 - (15 - df_5km_bobaas).clip(lower=0).sum(axis=1)
 
 
 
 # Now, create the streamlit app
 st.set_page_config(page_title="Maties Canoeing Dam Dice Results", layout="wide")
 
-st.dataframe(df_10km_rank)
-st.dataframe(df_5km_rank)
+## Create the sidebar for navigation between the different pages
+st.sidebar.title("Navigation")
+menu = st.sidebar.radio(
+    "Go to:",
+    ["Main", "Yster", "Bobaas"],
+)
 
+## Create the page for each sidebar section
+### First, the main page that includes the rankings and some info on time trial
+if menu == "Main":
+    st.title("Maties Canoeing Dam Dice Results")
 
+    # Show the two rank dataframes
+    st.dataframe(df_10km_rank)
+    st.dataframe(df_5km_rank)
 
-
+### Next, the page that contains information on the Yster competition
+elif menu == "Yster":
+    st.title("The Yster Competition")
+    
+    # Show the two yster dataframes
+    st.dataframe(df_10km_yster)
+    st.dataframe(df_5km_yster)
+    
+### Finally, the page that contains information on the Bobaas competition
+elif menu == "Bobaas":
+    st.title("The Bobaas Competition")
+    
+    # Show the two bobaas dataframes
+    st.dataframe(df_10km_bobaas)
+    st.dataframe(df_5km_bobaas)
+    
+    
+    
+    
+    
+    
+    
+    
 
