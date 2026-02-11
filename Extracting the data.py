@@ -27,27 +27,26 @@ url = url_first + Sheet_id + url_last + GID_number
 df = pd.read_csv(url)
 
 
-"""
-# Adding example names (only for testing purposes)
-names = ["Joa", "Josh", "Stefan", "Conrad", "Barry", "Tayla"]
-surnames = ["Theron", "Glyn-Cuthbert", "Erlank", "Kriel", "Muller", "Isaac"]
-times = ["00:30:00", "00:48:00", "00:51:00", "00:53:00", "00:42:00", "01:02:00"]
-distance = ["5 km", "10 km", "10 km", "10 km", "5 km", "10 km"]
-df_new = pd.DataFrame([
-    {
-        "Did you do doubles?": "No",
-        "Timestamp": "02/22/2026 10:10:10",
-        "Name": f"{names[i]}",
-        "Surname": f"{surnames[i]}",
-        "Did you do short or long dice?": f"{distance[i]}",
-        "Please submit your time": pd.to_timedelta(f"{times[i]}"),
-    }
-    for i in range(6)
-])
 
+# Adding example names (only for testing purposes)
+#names = ["Joa", "Josh", "Stefan", "Conrad", "Barry", "Tayla"]
+#surnames = ["Theron", "Glyn-Cuthbert", "Erlank", "Kriel", "Muller", "Isaac"]
+#times = ["00:30:00", "00:48:00", "00:51:00", "00:53:00", "00:42:00", "01:02:00"]
+#distance = ["5 km", "10 km", "10 km", "10 km", "5 km", "10 km"]
+#df_new = pd.DataFrame([
+#    {
+#        "Did you do doubles?": "No",
+#        "Timestamp": "02/22/2026 10:10:10",
+#        "Name": f"{names[i]}",
+#        "Surname": f"{surnames[i]}",
+#        "Did you do short or long dice?": f"{distance[i]}",
+#        "Please submit your time": pd.to_timedelta(f"{times[i]}"),
+#    }
+#    for i in range(6)
+#])
 # append to original DataFrame
-df = pd.concat([df, df_new], ignore_index=True)
-"""
+#df = pd.concat([df, df_new], ignore_index=True)
+
 
 
 # Now, lets clean and transform the data
