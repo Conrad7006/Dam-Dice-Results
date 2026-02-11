@@ -27,8 +27,8 @@ url = url_first + Sheet_id + url_last + GID_number
 df = pd.read_csv(url)
 
 
-
-# Adding example names
+"""
+# Adding example names (only for testing purposes)
 names = ["Joa", "Josh", "Stefan", "Conrad", "Barry", "Tayla"]
 surnames = ["Theron", "Glyn-Cuthbert", "Erlank", "Kriel", "Muller", "Isaac"]
 times = ["00:30:00", "00:48:00", "00:51:00", "00:53:00", "00:42:00", "01:02:00"]
@@ -47,7 +47,7 @@ df_new = pd.DataFrame([
 
 # append to original DataFrame
 df = pd.concat([df, df_new], ignore_index=True)
-
+"""
 
 
 # Now, lets clean and transform the data
