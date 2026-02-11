@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 """
 This file extracts the time trial data from the excel sheet on google drive
+Just note that the excel sheet must be set to "anyone with the link" under the share option
 
 An example on how to get the sheet id
-    If your sheet url is: https://docs.google.com/spreadsheets/d/1xRLXJtq75ceznTB74k36_ZTj9DBXYiGu7WVaXQWltnY/edit?resourcekey=&gid=907516662#gid=907516662
-    The sheet id is between d/ and /edit --> 1xRLXJtq75ceznTB74k36_ZTj9DBXYiGu7WVaXQWltnY
-    And the GID is the last number --> 907516662
+    If your sheet url is: https://docs.google.com/spreadsheets/d/1ZwtX-6lr_AwZnP1KmoIG8AfK3iQYioJuVMBR2Dqac6s/edit?resourcekey=&gid=199477171#gid=199477171
+    The sheet id is between d/ and /edit --> 1ZwtX-6lr_AwZnP1KmoIG8AfK3iQYioJuVMBR2Dqac6s
+    And the GID is the last number --> 199477171
     The url requires: https://docs.google.com/spreadsheets/d/<SPREADSHEET_ID>/export?format=csv&gid=<GID>
     Thus, the <spreadsheet_ID> has to be replaced with your specific sheet id and <GID> with the gid number
     Final: https://docs.google.com/spreadsheets/d/1xRLXJtq75ceznTB74k36_ZTj9DBXYiGu7WVaXQWltnY/export?format=csv&gid=907516662
@@ -18,8 +19,8 @@ import streamlit as st
 
 
 # First, find the file and create a dataframe
-Sheet_id = "1xRLXJtq75ceznTB74k36_ZTj9DBXYiGu7WVaXQWltnY"  # This should be replaced with the relavant sheet id each year
-GID_number = "907516662"   # This should also be replaced each year
+Sheet_id = "1ZwtX-6lr_AwZnP1KmoIG8AfK3iQYioJuVMBR2Dqac6s"  # This should be replaced with the relavant sheet id each year
+GID_number = "199477171"   # This should also be replaced each year
 url_first = "https://docs.google.com/spreadsheets/d/"
 url_last = "/export?format=csv&gid="
 
@@ -152,7 +153,7 @@ df_10km_rank = (df_10km.pivot_table(
 df_10km_bobaas["Total"] = 225 - (15 - df_10km_bobaas).clip(lower=0).sum(axis=1)  # Clip(lower=0) replaces negative values with 0
 df_5km_bobaas["Total"] = 225 - (15 - df_5km_bobaas).clip(lower=0).sum(axis=1)
 
-
+# %%
 
 # Now, create the streamlit app
 st.set_page_config(page_title="Maties Canoeing Dam Dice Results", layout="wide")
