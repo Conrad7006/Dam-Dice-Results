@@ -109,11 +109,11 @@ df_10km_yster["# Races"] = df_10km_yster.notna().sum(axis=1)
 
 ## Now that calculations are done, create a display copy for streamlit (timedelta is not nice)
 df_5km_yster_display = df_5km_yster.applymap(
-    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else None
+    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else "z"
 )
 
 df_10km_yster_display = df_10km_yster.applymap(
-    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else None
+    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else "z"
 )
 
 ## Pivot the dataframe so that each race is a column and each person is a row with bobaas points as the indeces
@@ -158,8 +158,11 @@ df_5km_bobaas["Total"] = 225 - (15 - df_5km_bobaas).clip(lower=0).sum(axis=1)
 df_10km_rank_display = df_10km_rank.fillna(999)
 df_5km_rank_display = df_5km_rank.fillna(999)
 
-#print(df_10km_rank.head())
-#print(df_10km_rank_display.head())
+df_10km_bobaas_display = df_10km_bobaas.fillna(999)
+df_5km_bobaas_display = df_5km_bobaas.fillna(999)
+
+#print(df_10km_yster_display.head())
+#print(df_10km_yster_display.info())
 
 # %% #
 
@@ -202,10 +205,10 @@ elif menu == "Bobaas":
     
     # Show the two bobaas dataframes
     st.write("The results of our 10 km dam dices")
-    st.dataframe(df_10km_bobaas)
+    st.dataframe(df_10km_bobaas_display.style.format(lambda x: "" if x == 999 else int(x)))
     
     st.write("\nThe results of our 5 km dam dices")
-    st.dataframe(df_5km_bobaas)
+    st.dataframe(df_5km_bobaas_display.style.format(lambda x: "" if x == 999 else int(x)))
     
     
     
