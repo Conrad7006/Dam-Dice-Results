@@ -109,11 +109,11 @@ df_10km_yster["# Races"] = df_10km_yster.notna().sum(axis=1)
 
 ## Now that calculations are done, create a display copy for streamlit (timedelta is not nice)
 df_5km_yster_display = df_5km_yster.applymap(
-    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else ""
+    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else None
 )
 
 df_10km_yster_display = df_10km_yster.applymap(
-    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else ""
+    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else None
 )
 
 ## Pivot the dataframe so that each race is a column and each person is a row with bobaas points as the indeces
