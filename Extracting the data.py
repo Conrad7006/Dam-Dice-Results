@@ -160,10 +160,6 @@ df_5km_rank_display = df_5km_rank.fillna(999)
 
 df_10km_bobaas_display = df_10km_bobaas.fillna(999)
 df_5km_bobaas_display = df_5km_bobaas.fillna(999)
-
-#print(df_10km_yster_display.head())
-#print(df_10km_yster_display.info())
-
 # %% #
 
 # Now, create the streamlit app
@@ -194,10 +190,10 @@ elif menu == "Yster":
     
     # Show the two yster dataframes
     st.write("The results of our 10 km dam dices")
-    st.dataframe(df_10km_yster_display)
+    st.dataframe(df_10km_yster_display.style.format(lambda x: "" if x == "z" else x))
     
     st.write("\nThe results of our 5 km dam dices")
-    st.dataframe(df_5km_yster_display)
+    st.dataframe(df_5km_yster_display.style.format(lambda x: "" if x == "z" else x))
     
 ### Finally, the page that contains information on the Bobaas competition
 elif menu == "Bobaas":
