@@ -160,7 +160,7 @@ df_5km_rank_display = df_5km_rank.fillna(999)
 
 df_10km_bobaas_display = df_10km_bobaas.fillna(999)
 df_5km_bobaas_display = df_5km_bobaas.fillna(999)
-# %% #
+# %%
 
 # Now, create the streamlit app
 st.set_page_config(page_title="Maties Canoeing Dam Dice Results", layout="wide")
