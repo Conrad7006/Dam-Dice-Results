@@ -210,6 +210,23 @@ elif menu == "Bobaas":
 elif menu == "Registration":
     st.title("This is the registration information for 2026")
     
+    # Student registration
+    st.header("Student registration")
+    st.write("This is the registration for Stellenbosch University students. Please ensure that your student number is entered correctly.\n")
+    st.write("The link for the student registration form is:\n")
+    st.write("https://docs.google.com/forms/d/e/1FAIpQLSdcib_kWSdhgvdJ3EvXZ788_DIU2bl1WlzJT5MJNGpGb4Tu1Q/viewform?usp=header")
+    
+    # Newbie Registration
+    st.header("Newbie Registration")
+    
+    
+    # Non-student registration
+    
+    
+    # Associate registration
+    
+    
+    # Rack registration
     
     
     # Create the download button for the rack agreement
