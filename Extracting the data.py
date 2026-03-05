@@ -208,35 +208,51 @@ elif menu == "Bobaas":
 
 ### Also add some information and the links for registration    
 elif menu == "Registration":
-    st.title("This is the registration information for 2026")
+    st.title("Maties Canoeing registration information 2026")
     
     # Student registration
     st.header("Student registration")
-    st.write("This is the registration for Stellenbosch University students. Please ensure that your student number is entered correctly.\n")
+    st.write("This is the registration for Stellenbosch University students. Please ensure that your student number is entered correctly.")
     st.write("The link for the student registration form is:\n")
     st.write("https://docs.google.com/forms/d/e/1FAIpQLSdcib_kWSdhgvdJ3EvXZ788_DIU2bl1WlzJT5MJNGpGb4Tu1Q/viewform?usp=header")
     
     # Newbie Registration
     st.header("Newbie Registration")
-    
+    st.write("This is the registration for Newbie Stellenbosch University Students. Please check that your student number is correct. ")
+    st.write("You classify as a Newbie if this is your first year as part of the Canoeing Club and you are not a member of any other paddling club. ")
+    st.write("The link for the newbie registration form is:\n")
+    st.write("https://docs.google.com/forms/d/e/1FAIpQLSc-WWypkiinlgb1jz2Mbg-Ty8ZrHZaesQFe7oPK2oNCKHZ_7Q/viewform?usp=header")
     
     # Non-student registration
-    
+    st.header("Non-student Registration")
+    st.write("This is the registration for non-students. To qualify you must not be a member of any other paddling club. ")
+    st.write("People who qualify for this membership include Maties staff and alumni, students at universities/colleges other than SU, scholars and other non-students. ")
+    st.write("The link for the non-student registration form is:\n")
+    st.write("https://docs.google.com/forms/d/e/1FAIpQLSczpS3cI2RwJmMqJgL3rJWJ2do-3XKmfpgk1yCIYNg1MhnCHg/viewform?usp=header")
     
     # Associate registration
-    
+    st.header("Associate registration")
+    st.write("To qualify for associate registration, you must not be a student at SU and be in good standing with another registered paddling club. ")
+    st.write("The link for the associate registration form is:\n")
+    st.write("https://docs.google.com/forms/d/e/1FAIpQLSdE_4OjsdKy5Gk9OrWAeBrKukYV8yo0R7WogA3KI-7ONFJhdA/viewform?usp=header")
     
     # Rack registration
+    st.header("Rack Registration")
+    st.write("This is registration of canoeing racks at the club for 2026. Please ensure that you have been allocated a rack space before you fill in this form. ")
+    st.wrtie("For information on rack spaces, please contact Francois Loeddolff or email the club at canoematies@gmail.com. ")
+    st.wrtie("Please note that the rack agreement must be signed and added to the form. The agreement can be downloaded below (the button). ")
+    st.wrtie("The link for the rack registration form is:\n")
+    st.wrtie("https://docs.google.com/forms/d/e/1FAIpQLSeTUq2fS2SSbWSrcFc5W4sRRq8QUilDaLSEHCDo5Ofk1T3P2g/viewform?usp=header")
     
-    
-    # Create the download button for the rack agreement
+    st.write("Click the button below to download the rack agreement.")
+    ## Create the download button for the rack agreement
     file_path = "Stellenbosch Canoeing Club Rack Agreement.docx"
 
-    ## We need to open the word document and read as binary to store the file as a variable
+    ### We need to open the word document and read as binary to store the file as a variable
     with open(file_path, "rb") as file:
         file_bytes = file.read()
     
-    ## Now create the button on the app interface
+    ### Now create the button on the app interface
     st.download_button(
         label = "Download Rack Agreement",
         data = file_bytes,
