@@ -239,10 +239,10 @@ elif menu == "Registration":
     # Rack registration
     st.header("Rack Registration")
     st.write("This is registration of canoeing racks at the club for 2026. Please ensure that you have been allocated a rack space before you fill in this form. ")
-    st.wrtie("For information on rack spaces, please contact Francois Loeddolff or email the club at canoematies@gmail.com. ")
-    st.wrtie("Please note that the rack agreement must be signed and added to the form. The agreement can be downloaded below (the button). ")
-    st.wrtie("The link for the rack registration form is:\n")
-    st.wrtie("https://docs.google.com/forms/d/e/1FAIpQLSeTUq2fS2SSbWSrcFc5W4sRRq8QUilDaLSEHCDo5Ofk1T3P2g/viewform?usp=header")
+    st.write("For information on rack spaces, please contact Francois Loeddolff or email the club at canoematies@gmail.com. ")
+    st.write("Please note that the rack agreement must be signed and added to the form. The agreement can be downloaded below (the button). ")
+    st.write("The link for the rack registration form is:\n")
+    st.write("https://docs.google.com/forms/d/e/1FAIpQLSeTUq2fS2SSbWSrcFc5W4sRRq8QUilDaLSEHCDo5Ofk1T3P2g/viewform?usp=header")
     
     st.write("Click the button below to download the rack agreement.")
     ## Create the download button for the rack agreement
