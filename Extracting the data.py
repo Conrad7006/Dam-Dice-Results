@@ -169,7 +169,7 @@ st.set_page_config(page_title="Maties Canoeing Dam Dice Results", layout="wide")
 st.sidebar.title("Navigation")
 menu = st.sidebar.radio(
     "Go to:",
-    ["Main", "Yster", "Bobaas"],
+    ["Main", "Yster", "Bobaas", "Registration"],
 )
 
 ## Create the page for each sidebar section
@@ -205,9 +205,27 @@ elif menu == "Bobaas":
     
     st.write("\nThe results of our 5 km dam dices")
     st.dataframe(df_5km_bobaas_display.style.format(lambda x: "" if x == 999 else int(x)))
+
+### Also add some information and the links for registration    
+elif menu == "Registration":
+    st.title("This is the registration information for 2026")
     
     
     
+    # Create the download button for the rack agreement
+    file_path = "Stellenbosch Canoeing Club Rack Agreement.docx"
+
+    ## We need to open the word document and read as binary to store the file as a variable
+    with open(file_path, "rb") as file:
+        file_bytes = file.read()
+    
+    ## Now create the button on the app interface
+    st.download_button(
+        label = "Download Rack Agreement",
+        data = file_bytes,
+        file_name = "Stellenbosch Canoeing Rack Agreement 2026.docx",
+        mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"   # This is a standard argument type when handling word .docx files
+    )
     
     
     
