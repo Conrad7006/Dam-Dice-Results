@@ -90,7 +90,7 @@ df_10km["Bobaas"] = df_10km["Rank"] + df_10km["Rank"] * df_10km["Did you do doub
 df_5km_yster = (df_5km.pivot_table(
     index = ["Name", "Surname"], 
     columns = "race_date",
-    values = "Please submit your time",
+    values = "Rank",
     aggfunc = "first"
     ).sort_index(axis=1)
 )
@@ -98,7 +98,7 @@ df_5km_yster = (df_5km.pivot_table(
 df_10km_yster = (df_10km.pivot_table(
     index = ["Name", "Surname"], 
     columns = "race_date",
-    values = "Please submit your time",
+    values = "Rank",
     aggfunc = "first"
     ).sort_index(axis=1)
 )
@@ -106,15 +106,6 @@ df_10km_yster = (df_10km.pivot_table(
 ## Create a number of races column for the yster competition
 df_5km_yster["# Races"] = df_5km_yster.notna().sum(axis=1)
 df_10km_yster["# Races"] = df_10km_yster.notna().sum(axis=1)
-
-## Now that calculations are done, create a display copy for streamlit (timedelta is not nice)
-df_5km_yster_display = df_5km_yster.applymap(
-    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else "z"
-)
-
-df_10km_yster_display = df_10km_yster.applymap(
-    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else "z"
-)
 
 ## Pivot the dataframe so that each race is a column and each person is a row with bobaas points as the indeces
 df_5km_bobaas = (df_5km.pivot_table(
@@ -133,21 +124,32 @@ df_10km_bobaas = (df_10km.pivot_table(
     ).sort_index(axis=1)
 )
 
-df_5km_rank = (df_5km.pivot_table(
+## Pivot the dataframe and have the values as the time completed
+df_5km_main = (df_5km.pivot_table(
     index = ["Name", "Surname"], 
     columns = "race_date",
-    values = "Rank",
+    values = "Please enter your time",
     aggfunc = "first"
     ).sort_index(axis=1)
 )
 
-df_10km_rank = (df_10km.pivot_table(
+df_10km_main = (df_10km.pivot_table(
     index = ["Name", "Surname"], 
     columns = "race_date",
-    values = "Rank",
+    values = "Please enter your time",
     aggfunc = "first"
     ).sort_index(axis=1)
 )
+    
+## Now that calculations are done, create a display copy for streamlit (timedelta is not nice)
+df_5km_main_display = df_5km_main.applymap(
+    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else "z"
+)
+
+df_10km_main_display = df_10km_main.applymap(
+    lambda x: str(x).replace("0 days ", "") if pd.notna(x) else "z"
+)
+
 
 ## Now create the Bobaas ranking column
 df_10km_bobaas["Total"] = 225 - (15 - df_10km_bobaas).clip(lower=0).sum(axis=1)  # Clip(lower=0) replaces negative values with 0
@@ -155,8 +157,8 @@ df_5km_bobaas["Total"] = 225 - (15 - df_5km_bobaas).clip(lower=0).sum(axis=1)
 
 
 ## The NaN values have to be replaced by 999 so that the display sorts it correclty
-df_10km_rank_display = df_10km_rank.fillna(999)
-df_5km_rank_display = df_5km_rank.fillna(999)
+df_10km_yster_display = df_10km_yster.fillna(999)
+df_5km_yster_display = df_5km_yster.fillna(999)
 
 df_10km_bobaas_display = df_10km_bobaas.fillna(999)
 df_5km_bobaas_display = df_5km_bobaas.fillna(999)
