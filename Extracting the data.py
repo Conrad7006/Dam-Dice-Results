@@ -59,7 +59,7 @@ df["mm"] = df["Timestamp"].dt.month
 df["yy"] = df["Timestamp"].dt.year
 
 df = df.drop(columns="Timestamp")
-df["race_date"] = df["dd"].astype(str).str.zfill(2) + "/" + df["mm"].astype(str).str.zfill(2)  # Create a new column to identify each race
+df["race_date"] = df["mm"].astype(str).str.zfill(2) + "/" + df["dd"].astype(str).str.zfill(2)  # Create a new column to identify each race
 
 ## Next, we want to convert the entered time to a datetime
 df["Please submit your time"] = pd.to_timedelta(df["Please submit your time"])
