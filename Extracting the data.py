@@ -128,7 +128,7 @@ df_10km_bobaas = (df_10km.pivot_table(
 df_5km_main = (df_5km.pivot_table(
     index = ["Name", "Surname"], 
     columns = "race_date",
-    values = "Please enter your time",
+    values = "Please submit your time",
     aggfunc = "first"
     ).sort_index(axis=1)
 )
@@ -136,7 +136,7 @@ df_5km_main = (df_5km.pivot_table(
 df_10km_main = (df_10km.pivot_table(
     index = ["Name", "Surname"], 
     columns = "race_date",
-    values = "Please enter your time",
+    values = "Please submit your time",
     aggfunc = "first"
     ).sort_index(axis=1)
 )
