@@ -181,10 +181,10 @@ if menu == "Main":
 
     # Show the two rank dataframes
     st.write("The results of our 10 km dam dices")
-    st.dataframe(df_10km_rank_display.style.format(lambda x: "" if x == 999 else int(x)))   # The format code is used to display correctly
+    st.dataframe(df_10km_main_display.style.format(lambda x: "" if x == 999 else int(x)))   # The format code is used to display correctly
     
     st.write("\nThe results of our 5 km dam dices")
-    st.dataframe(df_5km_rank_display.style.format(lambda x: "" if x == 999 else int(x)))
+    st.dataframe(df_5km_main_display.style.format(lambda x: "" if x == 999 else int(x)))
 
 ### Next, the page that contains information on the Yster competition
 elif menu == "Yster":
