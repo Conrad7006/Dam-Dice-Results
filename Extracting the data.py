@@ -51,6 +51,14 @@ df = pd.read_csv(url)
 
 
 # Now, lets clean and transform the data
+## Clean the names --> remove spaces and capitalise
+for col in df.select_dtypes(include="object").columns:
+    df[col] = df[col].str.strip()  # remove leading/trailing spaces
+
+## Standardize casing for names
+df["Name"] = df["Name"].str.title()
+df["Surname"] = df["Surname"].str.title()
+
 ## The timestamp has the date and the time. Time is unimportant and we want to separate the date.
 df["Timestamp"] = pd.to_datetime(df["Timestamp"], format="%m/%d/%Y %H:%M:%S")
 
@@ -62,7 +70,7 @@ df = df.drop(columns="Timestamp")
 df["race_date"] = df["mm"].astype(str).str.zfill(2) + "/" + df["dd"].astype(str).str.zfill(2)  # Create a new column to identify each race
 
 ## Next, we want to convert the entered time to a datetime
-df["Please submit your time"] = pd.to_timedelta(df["Please submit your time"])
+df["Please submit your time"] = pd.to_timedelta(df["Please submit your time"], errors="coerce")     # Coerce should be causing NaT (not a time) to appear rather than NaN
 
 ## Then, we replace the doubles answer with a 1 or 0
 def doubles_check(Answer):
@@ -162,7 +170,7 @@ df_5km_yster_display = df_5km_yster.fillna(999)
 
 df_10km_bobaas_display = df_10km_bobaas.fillna(999)
 df_5km_bobaas_display = df_5km_bobaas.fillna(999)
-# %% 
+# %
 
 # Now, create the streamlit app
 st.set_page_config(page_title="Maties Canoeing Dam Dice Results", layout="wide")
