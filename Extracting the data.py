@@ -95,8 +95,8 @@ df_5km["Bobaas"] = df_5km["Rank"] + df_5km["Rank"] * df_5km["Did you do doubles?
 df_10km["Bobaas"] = df_10km["Rank"] + df_10km["Rank"] * df_10km["Did you do doubles?"]
 
 ## The bobaas values can only go up to 15
-df_5km.loc[df_5km["race_date"] > 15, "Bobaas"] = 15
-df_10km.loc[df_10km["race_date"] > 15, "Bobaas"] = 15
+df_5km.loc[df_5km["Bobaas"] > 15, "Bobaas"] = 15
+df_10km.loc[df_10km["Bobaas"] > 15, "Bobaas"] = 15
 
 ## Need to replace the bobaas values on dates where no official comp was held
 dates_no_comp = ["04/01"]       # Just update the list with all values of no comp days
