@@ -94,6 +94,12 @@ df_10km["Rank"] = df_10km.groupby("race_date")["Please submit your time"].rank(m
 df_5km["Bobaas"] = df_5km["Rank"] + df_5km["Rank"] * df_5km["Did you do doubles?"]
 df_10km["Bobaas"] = df_10km["Rank"] + df_10km["Rank"] * df_10km["Did you do doubles?"]
 
+## Need to replace the bobaas values on dates where no official comp was held
+dates_no_comp = ["04/01"]       # Just update the list with all values of no comp days
+
+df_5km.loc[df_5km["race_date"].isin(dates_no_comp), "Bobaas"] = 15
+df_10km.loc[df_10km["race_date"].isin(dates_no_comp), "Bobaas"] = 15
+
 ## Pivot the dataframe so that each race is a column and each person a row
 df_5km_yster = (df_5km.pivot_table(
     index = ["Name", "Surname"], 
