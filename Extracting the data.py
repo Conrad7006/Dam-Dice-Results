@@ -158,7 +158,6 @@ df_10km_main_display = df_10km_main.applymap(
     lambda x: str(x).replace("0 days ", "") if pd.notna(x) else "z"
 )
 
-
 ## Now create the Bobaas ranking column
 df_10km_bobaas["Total"] = 225 - (15 - df_10km_bobaas).clip(lower=0).sum(axis=1)  # Clip(lower=0) replaces negative values with 0
 df_5km_bobaas["Total"] = 225 - (15 - df_5km_bobaas).clip(lower=0).sum(axis=1)
@@ -170,7 +169,9 @@ df_5km_yster_display = df_5km_yster.fillna(999)
 
 df_10km_bobaas_display = df_10km_bobaas.fillna(999)
 df_5km_bobaas_display = df_5km_bobaas.fillna(999)
-# %
+
+
+
 
 # Now, create the streamlit app
 st.set_page_config(page_title="Maties Canoeing Dam Dice Results", layout="wide")
