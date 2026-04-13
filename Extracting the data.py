@@ -150,11 +150,11 @@ df_10km_main = (df_10km.pivot_table(
 )
     
 ## Now that calculations are done, create a display copy for streamlit (timedelta is not nice)
-df_5km_main_display = df_5km_main.applymap(
+df_5km_main_display = df_5km_main.map(
     lambda x: str(x).replace("0 days ", "") if pd.notna(x) else "z"
 )
 
-df_10km_main_display = df_10km_main.applymap(
+df_10km_main_display = df_10km_main.map(
     lambda x: str(x).replace("0 days ", "") if pd.notna(x) else "z"
 )
 
