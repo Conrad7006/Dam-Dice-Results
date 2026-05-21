@@ -99,7 +99,7 @@ df_5km.loc[df_5km["Bobaas"] > 15, "Bobaas"] = 15
 df_10km.loc[df_10km["Bobaas"] > 15, "Bobaas"] = 15
 
 ## Need to replace the bobaas values on dates where no official comp was held
-dates_no_comp = ["04/01"]       # Just update the list with all values of no comp days
+dates_no_comp = ["04/01", "05/13"]       # Just update the list with all values of no comp days
 
 df_5km.loc[df_5km["race_date"].isin(dates_no_comp), "Bobaas"] = 15
 df_10km.loc[df_10km["race_date"].isin(dates_no_comp), "Bobaas"] = 15
@@ -181,7 +181,22 @@ df_10km_bobaas_display = df_10km_bobaas.fillna(999)
 df_5km_bobaas_display = df_5km_bobaas.fillna(999)
 
 
+# %%
 
+# This section is used to create the handicap dice batches
+## Compute the row average
+df_5km_main["Average"] = df_5km_main.mean(axis=1)
+df_10km_main["Average"] = df_10km_main.mean(axis=1)
+
+## Finding the fastest value
+fastest_5km = df_5km_main["Average"].min()
+fastest_10km = df_10km_main["Average"].min()
+
+## Now, create a difference column
+df_5km_main["Gap"] = df_5km_main["Average"] - fastest_5km
+df_10km_main["Gap"] = df_10km_main["Average"] - fastest_10km
+
+# %%
 
 # Now, create the streamlit app
 st.set_page_config(page_title="Maties Canoeing Dam Dice Results", layout="wide")
